@@ -7,7 +7,7 @@ interface NewsRepository {
 
     suspend fun getNewsById(newsId: String): News
 
-    fun getNewsList(): LiveData<List<News>>
+    suspend fun getNewsList(): List<News>
 
     fun loadNews()
 }

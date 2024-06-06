@@ -15,6 +15,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val key = property("apikey")?.toString()
+        buildConfigField("String", "CADASTRE_API_KEY", "\"$key\"")
     }
 
     buildTypes {
@@ -33,9 +36,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
+
+    implementation(libs.retorfit.core)
+    implementation(libs.retorfit.gsonConverter)
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -6,7 +6,7 @@ import ru.dev.android.cadastre.domain.news.repository.NewsRepository
 
 class GetNewsListUseCase(private val newsRepository: NewsRepository) {
 
-    operator fun invoke(): LiveData<List<News>> {
+    suspend operator fun invoke(): List<News> {
         return newsRepository.getNewsList()
     }
 }
