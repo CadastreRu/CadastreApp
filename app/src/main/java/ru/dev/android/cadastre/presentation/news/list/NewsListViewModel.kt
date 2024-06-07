@@ -1,4 +1,4 @@
-package ru.dev.android.cadastre.presentation.news
+package ru.dev.android.cadastre.presentation.news.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import ru.dev.android.cadastre.data.news.repository.NewsRepositoryImpl
 import ru.dev.android.cadastre.domain.news.entity.News
 import ru.dev.android.cadastre.domain.news.usecase.GetNewsListUseCase
 
-class NewsViewModel : ViewModel() {
+class NewsListViewModel : ViewModel() {
 
     private val repository = NewsRepositoryImpl()
 
@@ -19,9 +19,17 @@ class NewsViewModel : ViewModel() {
     val newsList: LiveData<List<News>>
         get() = _newsList
 
+    private val _newsLoadProgress = MutableLiveData<Boolean>()
+    val newsLoadProgress: LiveData<Boolean>
+        get() = _newsLoadProgress
+
     init {
         viewModelScope.launch {
+            _newsLoadProgress.value = true
             _newsList.value = getNewsListUseCase()
+            launch {
+                _newsLoadProgress.value = false
+            }
         }
     }
 }

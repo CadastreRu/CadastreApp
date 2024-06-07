@@ -19,6 +19,15 @@ class NewsMapper {
         )
     }
 
+    fun mapDtoListOneNewsToEntity(newsListDto: NewsListDto): News {
+        val item = newsListDto.newsList?.get(0)
+        return if (item != null) {
+            mapDtoToEntity(item)
+        } else {
+            throw RuntimeException("News is null")
+        }
+    }
+
     fun mapDtoListToEntityList(newsListDto: NewsListDto): List<News> {
         return newsListDto.newsList?.map {
             mapDtoToEntity(it)

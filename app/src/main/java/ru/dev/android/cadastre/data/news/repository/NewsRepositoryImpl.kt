@@ -11,7 +11,7 @@ class NewsRepositoryImpl : NewsRepository {
     private val mapper = NewsMapper()
 
     override suspend fun getNewsById(newsId: String): News {
-        TODO("Not yet implemented")
+        return mapper.mapDtoListOneNewsToEntity(service.getNewsDetail(newsId))
     }
 
     override suspend fun getNewsList(): List<News> {

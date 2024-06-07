@@ -37,6 +37,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        viewBinding = true
         buildConfig = true
     }
 }
@@ -49,6 +50,8 @@ dependencies {
 
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+
+    implementation(libs.glide)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
