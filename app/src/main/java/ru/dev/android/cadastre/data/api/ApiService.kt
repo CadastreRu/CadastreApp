@@ -5,6 +5,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.dev.android.cadastre.BuildConfig
+import ru.dev.android.cadastre.data.definition.dto.DefinitionsListDto
 import ru.dev.android.cadastre.data.news.dto.NewsDto
 import ru.dev.android.cadastre.data.news.dto.NewsListDto
 
@@ -19,6 +20,16 @@ interface ApiService {
     suspend fun getNewsDetail(
         @Path("id") newsId: String
     ): NewsListDto
+
+    @Headers(API_KEY)
+    @GET("definitions")
+    suspend fun getDefinitionsList(): DefinitionsListDto
+
+    @Headers(API_KEY)
+    @GET("definitions/{id}")
+    suspend fun getDefinitionDetail(
+        @Path("id") defId: String
+    ): DefinitionsListDto
 
     companion object {
 

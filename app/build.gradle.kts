@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -52,6 +53,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
 
     implementation(libs.glide)
+
+    implementation(libs.room.core)
+    ksp(libs.room.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
