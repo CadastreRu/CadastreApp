@@ -11,7 +11,7 @@ import ru.dev.android.cadastre.domain.definitions.entity.Definition
 import ru.dev.android.cadastre.domain.definitions.repository.DefinitionsRepository
 
 class DefinitionsRepositoryImpl(
-    private val context: Application
+    context: Application
 ) : DefinitionsRepository {
 
     private val apiService = ApiFactory.apiService
@@ -25,12 +25,14 @@ class DefinitionsRepositoryImpl(
     }
 
     override suspend fun getDefinitionById(defId: String): Definition {
-        TODO()
+        return definitionMapper.mapDtoListOneToEntity(apiService.getDefinitionDetail(defId))
     }
 
     override suspend fun loadDefinitions() {
         val listDto = apiService.getDefinitionsList().definitionList
-        val listDbModel = listDto.map { definitionMapper.mapDtoToDbModel(it) }
-        definitionDao.insertDefinitionsToDb(listDbModel)
+        val listDbModel = listDto?.map { definitionMapper.mapDtoToDbModel(it) }
+        if (listDbModel != null) {
+            definitionDao.insertDefinitionsToDb(listDbModel)
+        }
     }
 }
