@@ -1,21 +1,17 @@
 package ru.dev.android.cadastre.presentation.definition.detail
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.dev.android.cadastre.data.definition.repository.DefinitionsRepositoryImpl
 import ru.dev.android.cadastre.domain.definitions.entity.Definition
 import ru.dev.android.cadastre.domain.definitions.usecase.GetDefinitionByIdUseCase
+import javax.inject.Inject
 
-class DefinitionDetailViewModel(
-    context: Application
-) : AndroidViewModel(context) {
-
-    private val repository = DefinitionsRepositoryImpl(context)
-    private val getDefinitionByIdUseCase = GetDefinitionByIdUseCase(repository)
+class DefinitionDetailViewModel @Inject constructor(
+    private val getDefinitionByIdUseCase: GetDefinitionByIdUseCase
+) : ViewModel() {
 
     private val _definition = MutableLiveData<Definition>()
     val definition: LiveData<Definition>

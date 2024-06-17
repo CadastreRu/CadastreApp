@@ -1,8 +1,9 @@
 package ru.dev.android.cadastre.domain.definitions.usecase
 
 import ru.dev.android.cadastre.domain.definitions.repository.DefinitionsRepository
+import javax.inject.Inject
 
-class LoadDefinitionsUseCase(
+class LoadDefinitionsUseCase @Inject constructor(
     private val repository: DefinitionsRepository
 ) {
 

@@ -1,28 +1,43 @@
 package ru.dev.android.cadastre.presentation.news.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.dev.android.cadastre.CadastreApp
 import ru.dev.android.cadastre.R
 import ru.dev.android.cadastre.databinding.FragmentNewsListBinding
+import ru.dev.android.cadastre.presentation.ViewModelFactory
 import ru.dev.android.cadastre.presentation.news.detail.NewsDetailFragment
 import ru.dev.android.cadastre.presentation.news.list.adapter.NewsListAdapter
+import javax.inject.Inject
 
 class NewsListFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as CadastreApp).component
+    }
 
     private var _binding: FragmentNewsListBinding? = null
     private val binding: FragmentNewsListBinding
         get() = _binding ?: throw RuntimeException("FragmentShopListBinding is null")
 
     private val viewModel: NewsListViewModel by lazy {
-        ViewModelProvider(this)[NewsListViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[NewsListViewModel::class.java]
     }
 
     private lateinit var adapter: NewsListAdapter
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

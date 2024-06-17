@@ -3,8 +3,9 @@ package ru.dev.android.cadastre.data.news.mapper
 import ru.dev.android.cadastre.data.news.dto.NewsDto
 import ru.dev.android.cadastre.data.news.dto.NewsListDto
 import ru.dev.android.cadastre.domain.news.entity.News
+import javax.inject.Inject
 
-class NewsMapper {
+class NewsMapper @Inject constructor() {
 
     private fun mapDtoToEntity(newsDto: NewsDto): News {
         return News(

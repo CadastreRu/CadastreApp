@@ -3,11 +3,10 @@ package ru.dev.android.cadastre.data.definition.mapper
 import ru.dev.android.cadastre.data.definition.dto.DefinitionDto
 import ru.dev.android.cadastre.data.definition.dto.DefinitionsListDto
 import ru.dev.android.cadastre.data.definition.local.model.DefinitionDbModel
-import ru.dev.android.cadastre.data.news.dto.NewsListDto
 import ru.dev.android.cadastre.domain.definitions.entity.Definition
-import ru.dev.android.cadastre.domain.news.entity.News
+import javax.inject.Inject
 
-class DefinitionMapper {
+class DefinitionMapper @Inject constructor() {
 
     private fun mapDtoToEntity(definitionDto: DefinitionDto): Definition {
         return Definition(

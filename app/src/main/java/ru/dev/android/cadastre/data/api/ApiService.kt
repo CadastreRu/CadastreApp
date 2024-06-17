@@ -3,10 +3,8 @@ package ru.dev.android.cadastre.data.api
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
-import retrofit2.http.Query
 import ru.dev.android.cadastre.BuildConfig
 import ru.dev.android.cadastre.data.definition.dto.DefinitionsListDto
-import ru.dev.android.cadastre.data.news.dto.NewsDto
 import ru.dev.android.cadastre.data.news.dto.NewsListDto
 
 interface ApiService {

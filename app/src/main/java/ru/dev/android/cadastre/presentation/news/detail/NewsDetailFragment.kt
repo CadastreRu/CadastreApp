@@ -1,5 +1,6 @@
 package ru.dev.android.cadastre.presentation.news.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import ru.dev.android.cadastre.CadastreApp
 import ru.dev.android.cadastre.databinding.FragmentNewsDetailBinding
+import ru.dev.android.cadastre.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class NewsDetailFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as CadastreApp).component
+    }
 
     private lateinit var newsId: String
 
@@ -18,7 +29,12 @@ class NewsDetailFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentNewsDetailBinding is null")
 
     private val viewModel: NewsDetailViewModel by lazy {
-        ViewModelProvider(this)[NewsDetailViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[NewsDetailViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

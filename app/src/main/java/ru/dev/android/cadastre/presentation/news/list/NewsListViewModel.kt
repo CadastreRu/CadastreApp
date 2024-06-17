@@ -5,15 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.dev.android.cadastre.data.news.repository.NewsRepositoryImpl
 import ru.dev.android.cadastre.domain.news.entity.News
 import ru.dev.android.cadastre.domain.news.usecase.GetNewsListUseCase
+import javax.inject.Inject
 
-class NewsListViewModel : ViewModel() {
-
-    private val repository = NewsRepositoryImpl()
-
-    private val getNewsListUseCase = GetNewsListUseCase(repository)
+class NewsListViewModel @Inject constructor(
+    private val getNewsListUseCase: GetNewsListUseCase
+) : ViewModel() {
 
     private val _newsList = MutableLiveData<List<News>>()
     val newsList: LiveData<List<News>>

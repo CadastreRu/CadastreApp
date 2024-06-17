@@ -1,24 +1,40 @@
 package ru.dev.android.cadastre.presentation.definition.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.dev.android.cadastre.CadastreApp
 import ru.dev.android.cadastre.databinding.FragmentDefinitionDetailBinding
+import ru.dev.android.cadastre.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class DefinitionDetailFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as CadastreApp).component
+    }
 
     private var _binding: FragmentDefinitionDetailBinding? = null
     private val binding: FragmentDefinitionDetailBinding
         get() = _binding ?: throw RuntimeException("FragmentDefinitionDetailBinding is null")
 
     private val viewModel: DefinitionDetailViewModel by lazy {
-        ViewModelProvider(this)[DefinitionDetailViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[DefinitionDetailViewModel::class.java]
     }
 
     private lateinit var definitionId: String
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

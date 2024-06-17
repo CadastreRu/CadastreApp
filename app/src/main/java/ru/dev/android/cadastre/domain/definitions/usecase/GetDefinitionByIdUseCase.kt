@@ -2,8 +2,9 @@ package ru.dev.android.cadastre.domain.definitions.usecase
 
 import ru.dev.android.cadastre.domain.definitions.entity.Definition
 import ru.dev.android.cadastre.domain.definitions.repository.DefinitionsRepository
+import javax.inject.Inject
 
-class GetDefinitionByIdUseCase(
+class GetDefinitionByIdUseCase @Inject constructor(
     private val repository: DefinitionsRepository
 ) {
 

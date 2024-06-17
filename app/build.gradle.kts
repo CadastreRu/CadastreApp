@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.room.core)
     ksp(libs.room.compiler)
 
+    implementation(libs.dagger.core)
+    ksp(libs.dagger.compiler)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
